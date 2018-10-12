@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<head>
+    <title>Encyclopedia</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+    <div id="user-bar-div">
+        {% if user is undefined %}
+            <p>Hi {{ user }} <a href="/">Log out</a></p>
+            {# If logged-in display "save" button to save the subject's data and
+            "saved searches" button to render user's saved searches page#}
+        {% else %}
+            <p><a href="/signup">Sign up</a> or <a href="/login">Log in</a></p>
+        {% endif %}
+    </div>
+
+    <div id="search-bar-div">
+        <form action="{{ user }}/result" method="POST">
+                <H1>Search for...</H1> <input type="text" name="search"> <input type="submit" value="Submit">
+        </form>
+    </div>
+
+    {% if search_text %}
+
+    <div id="title-pic-div">
+        <h1>{{ search_text }}</h1>
+        {% if image_url %}
+            <img src="{{ image_url }} alt={{ search_text }}">
+        {% endif %}
+    </div>
+
+
+    <div id="desc-div">
+        {% if description %}
+            <p>Wiki says:</p>
+            <p>{{ description }}</p>
+        {% endif %}
+
+        <p>Read more about {{ search_text }} on Wikipedia: <a href="https://en.wikipedia.org/wiki/{{ search_text }}">https://en.wikipedia.org/wiki/{{ search_text }}</a></p>
+    </div>
+
+    <div>
+        {% if user is undefined %}
+            <form>
+                <input type="submit" value="Save">
+            </form>
+
+        {% endif %}
+    </div>
+
+    {% endif %}
+
+</body>
