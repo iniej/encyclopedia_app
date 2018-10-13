@@ -6,21 +6,32 @@
 </head>
 <body>
 
-    <div id="user-bar-div">
-        {% if user is undefined %}
-            <p>Hi {{ user }} <a href="/">Log out</a></p>
+        {% if user is not none %}
+
+            <div id="user-bar-div">
+                <p>Hi {{ user }} <a href="/">Log out</a></p>
+            </div>
             {# If logged-in display "save" button to save the subject's data and
             "saved searches" button to render user's saved searches page#}
-        {% else %}
-            <p><a href="/signup">Sign up</a> or <a href="/login">Log in</a></p>
-        {% endif %}
-    </div>
+            <div id="search-bar-div">
+                <form action="/{{ user }}/result" method="POST">
+                        <H1>Search for...</H1> <input type="text" name="search"> <input type="submit" value="Submit">
+                </form>
+            </div>
 
-    <div id="search-bar-div">
-        <form action="{{ user }}/result" method="POST">
-                <H1>Search for...</H1> <input type="text" name="search"> <input type="submit" value="Submit">
-        </form>
-    </div>
+        {% else %}
+
+            <div id="user-bar-div">
+                <p><a href="/signup">Sign up</a> or <a href="/login">Log in</a></p>
+            </div>
+
+            <div id="search-bar-div">
+                <form action="/result" method="POST">
+                        <H1>Search for...</H1> <input type="text" name="search"> <input type="submit" value="Submit">
+                </form>
+            </div>
+
+        {% endif %}
 
     {% if search_text %}
 
@@ -30,7 +41,6 @@
             <img src="{{ image_url }} alt={{ search_text }}">
         {% endif %}
     </div>
-
 
     <div id="desc-div">
         {% if description %}
