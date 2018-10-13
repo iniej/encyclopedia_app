@@ -11,8 +11,9 @@ def get_image_url(search_text):
     image_url = ""
 
     try:
-        response = requests.get("https://pixabay.com/api/?key=" + pixabay_api_key + "&q=" +
-                                search_text + "&image_type=photo")
+        params_list = {"key": pixabay_api_key, "q": search_text, "image_type": "photo"}
+
+        response = requests.get("https://pixabay.com/api/", params=params_list)
 
         json_resp = response.text
 

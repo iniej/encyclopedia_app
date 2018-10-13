@@ -9,8 +9,13 @@ def get_description(search_text):
     search_text.replace(" ", "_")
 
     try:
-        response = requests.get("https://en.wikipedia.org/w/api.php?format="
-                                "json&action=query&prop=extracts&exintro=&explaintext=&titles=" + search_text)
+        params_list = {"format": "json", "action": "query", "prop": "extracts", "exintro": "",
+                       "explaintext": "", "titles": search_text}
+
+        # response = requests.get("https://en.wikipedia.org/w/api.php?format="
+        #                         "json&action=query&prop=extracts&exintro=&explaintext=&titles=" + search_text)
+
+        response = requests.get("https://en.wikipedia.org/w/api.php", params=params_list)
 
         json_resp = response.text
 
