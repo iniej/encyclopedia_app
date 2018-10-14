@@ -19,8 +19,6 @@ def get_image_url(search_text):
 
         image = json.loads(json_resp)
 
-        print(image)
-
         if len(image["hits"]) != 0:
             image_url = image["hits"][0]["largeImageURL"]
 

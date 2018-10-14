@@ -12,9 +12,6 @@ def get_description(search_text):
         params_list = {"format": "json", "action": "query", "prop": "extracts", "exintro": "",
                        "explaintext": "", "titles": search_text}
 
-        # response = requests.get("https://en.wikipedia.org/w/api.php?format="
-        #                         "json&action=query&prop=extracts&exintro=&explaintext=&titles=" + search_text)
-
         response = requests.get("https://en.wikipedia.org/w/api.php", params=params_list)
 
         json_resp = response.text
@@ -22,9 +19,8 @@ def get_description(search_text):
         desc = json.loads(json_resp)
 
         page_id = list(desc["query"]["pages"])[0]
-        description = desc["query"]["pages"][page_id]["extract"]
 
-        print(description)
+        description = desc["query"]["pages"][page_id]["extract"]
 
     except requests.exceptions.HTTPError as http_error:
         print("There's a Http Error", http_error)
