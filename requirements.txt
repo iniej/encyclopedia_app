@@ -17,4 +17,3 @@ setuptools==40.4.3
 urllib3==1.23
 yarg==0.1.9
 
-**Please add to the list any packages and its version you have installed
